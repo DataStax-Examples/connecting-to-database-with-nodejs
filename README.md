@@ -1,34 +1,47 @@
-# datastax-examples-template
-This a sample template repo for contributions to the DataStax Examples platform.  This provides the minimum set of items needed to create a new example for submission to the DataStax Examples platform.
+# Switching Connections between DDAC/C*/DSE or Apollo with NodeJs
+This application shows how to use configure your NodeJs application to connect to DDAC/Cassandra/DSE or an Apollo database at runtime.
 
-## Prerequisites
-* Git must be installed
-	* If it is not installed then follow the guide found [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-	
+Contributors: [Dave Bechberger](https://github.com/bechbd) based on [this](https://github.com/datastax/nodejs-driver/blob/master/examples/basic/basic-connect.js) example
 
+## Objectives
+* To demonstrate how to specify at runtime between a standard (DSE/DDAC/C*) client configuration and an Apollo configuration for the same application.
 
-## Cloning this Repo to get started
-In a Terminal window.
+## Project Layout
+*[app.js](app.js) - The main application file which contains all the logic to switch between the configurations
 
-1) Create a bare clone of the repository.
+## How this Sample Works
+This sample uses environment variables to specify the configuration parameters and whether to use a standard (DSE/DDAC/C*) configuration or an Apollo configuration.  All the logic to switch between the configurations occurs in the `getClientConfiguration` function.  
+* If you specify the `USEAPOLLO` environment variable:
+   	* The process's environment variables are checked to see that `DBUSERNAME`, `DBPASSWORD`, `SECURECONNECTBUNDLEPATH`, and `KEYSPACE` exist
+		* If they exist then the Apollo connection is created
+		* If they do not exist then an error is thrown
+* If you so not specify the `USEAPOLLO` environment variable:
+   	* The process's environment variables are checked to see that `CONTACTPOINTS` and `DATACENTER` exist
+		* If they exist then the standard connection is created
+		* If they do not exist then an error is thrown
+		* If `DBUSERNAME` and `DBPASSWORD` exist then credentials are added to the configuration
+		* If `KEYSPACE` exists then it is added to the configuration
 
-	git clone --bare https://github.com/bechbd/datastax-examples-template.git`
+While these criteria added to the configuration are commonly used configuration parameters you are able to specify any additional ones in the code.
 
-2) Mirror-push to the new repository.
+## Setup and Running
 
-	cd datastax-examples-template.git
-	git push --mirror https://github.com/bechbd/<new repo name>.git`
+### Prerequisites
+* Node 4 and above
+* A DSE/DDAC/C* cluster or an Apollo database to connect to with the appropriate connection information
 
-3) Remove the temporary local repository you created in step 1.
+### Running
 
-	cd ..
-	rm -rf datastax-examples-template.git
+If you would like to connect to an Apollo database you will first need to download the secure connect bundle following the guidance found [here](https://docs.datastax.com/en/landing_page/doc/landing_page/cloud.html).
 
+Once you have this information you can run this to connect to Apollo by using the command below, with the appropriate configuration added:
 
+`USEAPOLLO=true DBUSERNAME=XXX DBPASSWORD=XXX KEYSPACE=XXX SECURECONNECTBUNDLEPATH="/valid/path/to/secureconnectbundle.zip" node app.js`
 
-4) Clone the newly created repository from step 3.
+If you would like to connect to a DSE/DDAC/C* cluster use the command below, with the appropriate configuration added:
 
-	git clone https://github.com/bechbd/<new repo name>.git
-	
-You are now ready to work away in this duplicated repo
- 
+`CONTACTPOINTS=XX.XX.XX.XX DATACENTER=XXXX node app.js`
+
+Once you run this against either option you will get output that specifies the number of hosts and their IP addresses printed to the console:
+
+```Connected to cluster with 3 host(s) ["XX.XX.XX.136:9042","XX.XX.XX.137:9042","XX.XX.XX.138:9042"]```
