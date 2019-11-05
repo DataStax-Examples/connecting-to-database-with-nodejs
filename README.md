@@ -7,16 +7,16 @@ Contributors: [Dave Bechberger](https://github.com/bechbd) based on [this](https
 * To demonstrate how to specify at runtime between a standard (DSE/DDAC/C*) client configuration and an Apollo configuration for the same application.
 
 ## Project Layout
-*[app.js](app.js) - The main application file which contains all the logic to switch between the configurations
+* [app.js](app.js) - The main application file which contains all the logic to switch between the configurations
 
 ## How this Sample Works
 This sample uses environment variables to specify the configuration parameters and whether to use a standard (DSE/DDAC/C*) configuration or an Apollo configuration.  All the logic to switch between the configurations occurs in the `getClientConfiguration` function.  
 * If you specify the `USEAPOLLO` environment variable:
-   	* The process's environment variables are checked to see that `DBUSERNAME`, `DBPASSWORD`, `SECURECONNECTBUNDLEPATH`, and `KEYSPACE` exist
+   	* The environment variables are checked to see that `DBUSERNAME`, `DBPASSWORD`, `SECURECONNECTBUNDLEPATH`, and `KEYSPACE` exist
 		* If they exist then the Apollo connection is created
 		* If they do not exist then an error is thrown
 * If you so not specify the `USEAPOLLO` environment variable:
-   	* The process's environment variables are checked to see that `CONTACTPOINTS` and `DATACENTER` exist
+   	* The environment variables are checked to see that `CONTACTPOINTS` and `DATACENTER` exist
 		* If they exist then the standard connection is created
 		* If they do not exist then an error is thrown
 		* If `DBUSERNAME` and `DBPASSWORD` exist then credentials are added to the configuration
@@ -32,7 +32,7 @@ While these criteria added to the configuration are commonly used configuration 
 
 ### Running
 
-If you would like to connect to an Apollo database you will first need to download the secure connect bundle following the guidance found [here](https://docs.datastax.com/en/landing_page/doc/landing_page/cloud.html).
+To connect to an Apollo database you first need to download the secure connect bundle following the instructions found [here](https://docs.datastax.com/en/landing_page/doc/landing_page/cloud.html).
 
 Once you have this information you can run this to connect to Apollo by using the command below, with the appropriate configuration added:
 
