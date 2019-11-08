@@ -1,16 +1,16 @@
 # Switching Connections between DDAC/C*/DSE or Apollo with NodeJs
-This application shows how to use configure your NodeJs application to connect to DDAC/Cassandra/DSE or an Apollo database at runtime.
+This application shows how to use configure your NodeJs application to connect to Cassandra or an Apollo database at runtime.
 
 Contributors: [Dave Bechberger](https://github.com/bechbd) based on [this](https://github.com/datastax/nodejs-driver/blob/master/examples/basic/basic-connect.js) example
 
 ## Objectives
-* To demonstrate how to specify at runtime between a standard (DSE/DDAC/C*) client configuration and an Apollo configuration for the same application.
+* To demonstrate how to specify at runtime between a Cassandra client configuration and an Apollo configuration for the same application.
 
 ## Project Layout
 * [app.js](app.js) - The main application file which contains all the logic to switch between the configurations
 
 ## How this Sample Works
-This sample uses environment variables to specify the configuration parameters and whether to use a standard (DSE/DDAC/C*) configuration or an Apollo configuration.  All the logic to switch between the configurations occurs in the `getClientConfiguration` function.  
+This sample uses environment variables to specify the configuration parameters and whether to use a Cassandra configuration or an Apollo configuration.  All the logic to switch between the configurations occurs in the `getClientConfiguration` function.  
 * If you specify the `USEAPOLLO` environment variable:
    	* The environment variables are checked to see that `DBUSERNAME`, `DBPASSWORD`, `SECURECONNECTBUNDLEPATH`, and `KEYSPACE` exist
 		* If they exist then the Apollo connection is created
@@ -28,7 +28,11 @@ While these criteria added to the configuration are commonly used configuration 
 
 ### Prerequisites
 * Node 4 and above
-* A DSE/DDAC/C* cluster or an Apollo database to connect to with the appropriate connection information
+* A Cassandra cluster or an Apollo database to connect to with the appropriate connection information
+
+Additionally while this example uses environment variables to control which configuration is selected this could also be done via the use of configuration files or command line parameters.
+
+For clarity this sample does not contain any of the normal error handling process you would want to wrap around connecting to a cluster to handle likely errors that would occur.
 
 ### Running
 
@@ -38,7 +42,7 @@ Once you have this information you can run this to connect to Apollo by using th
 
 `USEAPOLLO=true DBUSERNAME=XXX DBPASSWORD=XXX KEYSPACE=XXX SECURECONNECTBUNDLEPATH="/valid/path/to/secureconnectbundle.zip" node app.js`
 
-If you would like to connect to a DSE/DDAC/C* cluster use the command below, with the appropriate configuration added:
+If you would like to connect to a Cassandra cluster use the command below, with the appropriate configuration added:
 
 `CONTACTPOINTS=XX.XX.XX.XX DATACENTER=XXXX node app.js`
 
