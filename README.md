@@ -1,10 +1,12 @@
-# Switching Connections between DDAC/C*/DSE or Apollo with NodeJs
-This application shows how to use configure your NodeJs application to connect to Cassandra or an Apollo database at runtime.
+# Switch Connections between Apache Cassandra™ and Apollo databases
+This application shows how to use both the [Node.js DataStax Driver](https://docs.datastax.com/en/developer/nodejs-driver/latest) to connect to an on-prem Cassandra database or a Apollo database in the cloud at runtime using environment variables.
 
-Contributors: [Dave Bechberger](https://github.com/bechbd) based on [this](https://github.com/datastax/nodejs-driver/blob/master/examples/basic/basic-connect.js) example
+Contributor(s): [Dave Bechberger](https://github.com/bechbd)
 
 ## Objectives
-* To demonstrate how to specify at runtime between a Cassandra client configuration and an Apollo configuration for the same application.
+* Shows the differences between a Cassandra connection configuration and an Apollo connection configuration in a single app.
+* Provide a demonstration of how to configure the database connection at runtime.
+* See the [documentation](https://docs.datastax.com/en/developer/nodejs-driver/latest/features/cloud/) for more details about the Apollo connection configuration for the Node.js Driver
 
 ## Project Layout
 * [app.js](app.js) - The main application file which contains all the logic to switch between the configurations
