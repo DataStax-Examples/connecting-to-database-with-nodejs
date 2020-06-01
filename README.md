@@ -12,7 +12,7 @@ Contributor(s): [Dave Bechberger](https://github.com/bechbd)
 * [app.js](app.js) - The main application file which contains all the logic to switch between the configurations
 
 ## How this Sample Works
-This sample uses environment variables to specify the configuration parameters and whether to use a Cassandra configuration or an Apollo configuration.  All the logic to switch between the configurations occurs in the `getClientConfiguration` function.  
+This sample uses environment variables to specify the configuration parameters and whether to use a Cassandra configuration or an Astra configuration.  All the logic to switch between the configurations occurs in the `getClientConfiguration` function.  
 * If you specify the `USEASTRA` environment variable:
    	* The environment variables are checked to see that `DBUSERNAME`, `DBPASSWORD`, `SECURECONNECTBUNDLEPATH`, and `KEYSPACE` exist
 		* If they exist then the Apollo connection is created
