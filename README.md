@@ -1,5 +1,5 @@
 # Switch Connections between Apache Cassandra™ and Astra databases
-This application shows how to use the [Node.js DataStax Driver](https://docs.datastax.com/en/developer/nodejs-driver/latest) to connect to an on-prem Cassandra database or a Apollo database in the cloud at runtime using environment variables.
+This application shows how to use the [Node.js DataStax Driver](https://docs.datastax.com/en/developer/nodejs-driver/latest) to connect to an on-prem Cassandra database or a Astra database in the cloud at runtime using environment variables.
 
 Contributor(s): [Dave Bechberger](https://github.com/bechbd)
 
