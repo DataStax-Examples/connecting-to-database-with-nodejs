@@ -4,7 +4,7 @@ const cassandra = require('cassandra-driver');
 
 function getClientConfiguration() {
     var config = {};
-    if (process.env.USEAPOLLO) {
+    if (process.env.USEASTRA) {
         //Since we are going to use Apollo let's check to make sure we have the username, password, 
         // secure connect bundle path, and keyspace environment variables specified
         if (process.env.DBUSERNAME && process.env.DBPASSWORD &&
